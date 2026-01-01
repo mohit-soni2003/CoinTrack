@@ -8,7 +8,31 @@ const routes = require("./src/routes/index");
 const app = express();
 
 // Middleware
-app.use(cors());
+// Hardcoded frontend origin (set directly here instead of using environment variables)
+// Replace this with your deployed frontend URL if it changes.
+const FRONTEND_ORIGIN = 'https://coin-track-two.vercel.app';
+
+const corsOptions = {
+  origin: FRONTEND_ORIGIN || true, // when null, allow any origin
+  methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type','Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+app.use((req, res, next) => {
+  // if FRONTEND_ORIGIN is not set, allow all origins (development)
+  if (!FRONTEND_ORIGIN) return next();
+  // set CORS headers for the specific origin
+  res.header('Access-Control-Allow-Origin', FRONTEND_ORIGIN);
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  next();
+});
+
+// enable default cors handling (useful for preflight)
+app.options('*', cors(corsOptions));
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // DB connection (cached)
