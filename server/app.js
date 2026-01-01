@@ -17,7 +17,19 @@ const corsOptions = {
   optionsSuccessStatus: 200
 };
 
-// Enable CORS for all routes and handle preflight
+// Explicitly set CORS headers for every response and handle OPTIONS preflight
+// This ensures a correct preflight response even on serverless platforms.
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, Accept, X-Requested-With');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  // respond to OPTIONS immediately
+  if (req.method === 'OPTIONS') return res.status(204).end();
+  next();
+});
+
+// Also use the cors middleware for completeness
 app.options('*', cors(corsOptions));
 app.use(cors(corsOptions));
 app.use(express.json());
