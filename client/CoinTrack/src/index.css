@@ -1,0 +1,120 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+:root {
+  --app-bg: #f7f8fb;
+  --primary: #0d6efd;
+  --muted: #6c757d;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: var(--app-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: white;
+  border-bottom: 1px solid #eee;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.app-header .title {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.app-body {
+  flex: 1 1 auto;
+  padding: 12px;
+  padding-bottom: 80px; /* room for nav */
+}
+
+.page {
+  margin-bottom: 24px;
+}
+
+.page-center {
+  text-align: center;
+  padding-top: 30px;
+}
+
+.spaced > * { margin-right: 8px; margin-bottom: 8px; }
+
+.card.summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 8px;
+  background: white;
+  margin-bottom: 12px;
+}
+
+.list-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.muted { color: var(--muted); font-size: .9rem; }
+
+/* Mobile footer nav */
+.mobile-nav {
+  position: fixed;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  height: 62px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  z-index: 20;
+}
+
+.mobile-nav .nav-link {
+  color: #333;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  font-size: 11px;
+  padding: 6px 8px;
+}
+
+.mobile-nav .nav-link .nav-label { font-size: 11px; margin-top: 2px; }
+
+.mobile-nav .center-action {
+  margin-top: -22px;
+  background: var(--primary);
+  color: white !important;
+  width: 56px;
+  height: 56px;
+  border-radius: 28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow: 0 6px 18px rgba(13,110,253,0.2);
+}
