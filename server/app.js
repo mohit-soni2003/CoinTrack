@@ -2,7 +2,7 @@ const express = require("express");
 const connectDB = require("./src/config/db");
 require("dotenv").config();
 const cors = require("cors");
-const routes = require("./src/routes/index");
+const routes = require("./src/routes");
 
 const app = express();
 
@@ -14,9 +14,12 @@ if (!process.env.JWT_SECRET) {
 const corsOptions = {
   origin: process.env.FRONTEND_ORIGIN_URL,
   credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
 
-app.use(cors(corsOptions)); // ✅ enough
+// ✅ THIS ALONE HANDLES PREFLIGHT
+app.use(cors(corsOptions));
 app.use(express.json());
 
 connectDB();
